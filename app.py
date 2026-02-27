@@ -4,21 +4,33 @@ import requests
 app = Flask(__name__)
 BASE_URL = "https://www.thesportsdb.com/api/v1/json/3/"
 
-# SEU DICIONÁRIO DE LOGOS (Prioridade máxima)
+ # SEU DICIONÁRIO DE LOGOS (Prioridade máxima)
 CLUB_LOGOS = {
+
     # --- BRASIL ---
-    "Flamengo": "https://upload.wikimedia.org/wikipedia/commons/9/93/Flamengo-RJ_%28BRA%29.png",
-    "Palmeiras": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.svg",
-    "Corinthians": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Corinthians_logo.svg",
-    "Sao Paulo": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Sao_Paulo_FC_crest.svg",
-    "Santos": "https://upload.wikimedia.org/wikipedia/commons/1/15/Santos_Logo.png",
-    "Gremio": "https://upload.wikimedia.org/wikipedia/en/f/f1/Gremio.svg",
-    "Internacional": "https://upload.wikimedia.org/wikipedia/commons/5/5a/SC_Internacional_Brazil_Logo.svg",
-    "Cruzeiro": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Cruzeiro_Esporte_Clube_logo.svg",
-    "Atletico Mineiro": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Atletico_Mineiro_logo.svg",
-    "Fluminense": "https://upload.wikimedia.org/wikipedia/en/9/9e/Fluminense_fc_logo.svg",
-    "Vasco": "https://upload.wikimedia.org/wikipedia/en/5/5c/CR_Vasco_da_Gama_2021_logo.svg",
-    "Botafogo": "https://upload.wikimedia.org/wikipedia/en/c/cb/Botafogo_de_Futebol_e_Regatas_logo.svg",
+    "Flamengo": "https://logodetimes.com/times/flamengo/logo-flamengo-256.png",
+
+    "Palmeiras": "https://logodetimes.com/times/palmeiras/logo-palmeiras-256.png",
+
+    "Corinthians": "https://logodetimes.com/times/corinthians/logo-corinthians-256.png",
+
+    "Sao Paulo": "https://logodetimes.com/times/sao-paulo/logo-sao-paulo-256.png",
+
+    "Santos": "https://logodetimes.com/times/santos/logo-santos-256.png",
+
+    "Gremio": "https://logodetimes.com/times/gremio/logo-gremio-256.png",
+
+    "Internacional": "https://logodetimes.com/times/internacional/logo-internacional-256.png",
+
+    "Cruzeiro": "https://logodetimes.com/times/cruzeiro/logo-cruzeiro-256.png",
+
+    "Atletico Mineiro": "https://logodetimes.com/times/atletico-mineiro/logo-atletico-mineiro-256.png",
+
+    "Fluminense": "https://logodetimes.com/times/fluminense/logo-fluminense-256.png",
+
+    "Vasco": "https://logodetimes.com/times/vasco/logo-vasco-256.png",
+
+    "Botafogo": "https://logodetimes.com/times/botafogo/logo-botafogo-256.png",
 
     # --- INGLATERRA ---
     "Manchester United": "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
@@ -72,7 +84,23 @@ CLUB_LOGOS = {
 
     # --- AFRICA ---
     "Al Ahly": "https://upload.wikimedia.org/wikipedia/en/9/9f/Al_Ahly_SC_logo.svg",
-    "Zamalek": "https://upload.wikimedia.org/wikipedia/en/0/0c/Zamalek_SC_logo.svg"
+    "Zamalek": "https://upload.wikimedia.org/wikipedia/en/0/0c/Zamalek_SC_logo.svg",
+
+    "Lyon": "https://upload.wikimedia.org/wikipedia/en/c/c6/Olympique_Lyonnais.svg.png",
+
+    "Al Nassr": "https://upload.wikimedia.org/wikipedia/en/a/a9/Al-Nassr_FC_logo.svg.png",
+
+    "Newcastle": "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg.png",
+
+    "Brentford": "https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg.png",
+
+    "Fulham": "https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg.png",
+
+    "Nottingham Forest": "https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg.png",
+
+    "West Ham": "https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg.png",
+
+    "Real Betis": "https://upload.wikimedia.org/wikipedia/en/1/13/Real_Betis_logo.svg.png"
 }
 
 CLUB_TITLES = {
@@ -265,49 +293,120 @@ CLUB_TITLES = {
 
     # --- ESCÓCIA ---
     "Celtic": ["54x Scottish League", "1x Champions League"],
-    "Rangers": ["55x Scottish League", "1x Cup Winners Cup"]
+    "Rangers": ["55x Scottish League", "1x Cup Winners Cup"],
+    
+    # --- FRANÇA ---
+    "Lyon": [
+        "7x Ligue 1",
+        "5x Coupe de France",
+        "8x Supercopa da França"
+    ],
+
+    # --- ARÁBIA SAUDITA ---
+    "Al Nassr": [
+        "9x Saudi Pro League",
+        "6x King Cup",
+        "2x Supercopa Saudita",
+        "1x Arab Club Champions Cup"
+    ],
+
+    # --- INGLATERRA ---
+    "Newcastle": [
+        "4x Premier League",
+        "6x FA Cup",
+        "1x Inter-Cities Fairs Cup"
+    ],
+
+    "Brentford": [
+        "2x Championship",
+        "1x League One"
+    ],
+
+    "Fulham": [
+        "3x Championship",
+        "1x Intertoto Cup"
+    ],
+
+    "Nottingham Forest": [
+        "1x Premier League",
+        "2x Champions League",
+        "4x League Cup"
+    ],
+
+    "West Ham": [
+        "3x FA Cup",
+        "1x Europa Conference League",
+        "1x Cup Winners Cup"
+    ],
+
+    # --- ESPANHA ---
+    "Real Betis": [
+        "1x La Liga",
+        "3x Copa del Rey"
+    ]
 }
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    club_data, players, past_events, honors = None, [], [], []
-    logo_final = None
+    club_data = None
+    players = []
+    past_events = []
+    honors = []
     error_msg = None
+    logo_final = None
     
     if request.method == 'POST':
         team_name = request.form.get('team_name').strip()
         try:
+            # 1. Busca os dados básicos do time na API
             response = requests.get(f"{BASE_URL}searchteams.php?t={team_name}")
             data = response.json()
             
             if data.get('teams'):
+                # Pegamos o primeiro resultado (mais relevante)
                 club_data = data['teams'][0]
-                tid = club_data['idTeam']
+                team_id = club_data['idTeam']
                 official_name = club_data['strTeam']
                 
-                # --- LÓGICA DE LOGO ---
-                # 1. Tenta no seu dicionário manual
+                # --- LÓGICA DE ESCUDO (LOGO) ---
+                # Prioridade: Dicionário manual -> API -> Fallback Genérico
                 logo_final = CLUB_LOGOS.get(official_name, CLUB_LOGOS.get(team_name))
-                
-                # 2. Se não estiver no dicionário, usa o da API
                 if not logo_final:
                     logo_final = club_data.get('strTeamBadge')
-                
-                # 3. Se ainda assim não houver nada, ícone padrão
                 if not logo_final:
-                    logo_final = "https://cdn-icons-png.flaticon.com/512/53/53244.png"
+                    logo_final = "https://logodetimes.com/wp-content/uploads/2017/12/default.png"
+                
+                # --- LÓGICA DE TÍTULOS (HONORS) ---
+                # Busca inteligente: verifica se o nome oficial ou o termo digitado 
+                # existe como chave no seu dicionário de títulos.
+                for key in CLUB_TITLES:
+                    if key.lower() in official_name.lower() or key.lower() in team_name.lower():
+                        honors = CLUB_TITLES[key]
+                        break
 
-                # Buscar Dados Adicionais
-                players = requests.get(f"{BASE_URL}lookup_all_players.php?id={tid}").json().get('player', []) or []
-                past_events = requests.get(f"{BASE_URL}eventslast.php?id={tid}").json().get('results', []) or []
-                honors = CLUB_TITLES.get(official_name, CLUB_TITLES.get(team_name, []))
+                # --- DADOS EXTRAS DA API ---
+                # Busca o elenco (players)
+                p_resp = requests.get(f"{BASE_URL}lookup_all_players.php?id={team_id}")
+                players = p_resp.json().get('player', []) or []
+                
+                # Busca últimos resultados (past events)
+                past_resp = requests.get(f"{BASE_URL}eventslast.php?id={team_id}")
+                past_events = past_resp.json().get('results', []) or []
+
             else:
-                error_msg = f"Clube '{team_name}' não encontrado."
-        except:
-            error_msg = "Erro na conexão."
+                error_msg = f"Clube '{team_name}' não encontrado no banco de dados global."
+        
+        except Exception as e:
+            print(f"Erro: {e}")
+            error_msg = "Erro ao conectar com o servidor de esportes. Tente novamente."
 
-    return render_template('index.html', club=club_data, players=players, 
-                           past=past_events, honors=honors, error=error_msg, logo=logo_final)
+    return render_template('index.html', 
+                           club=club_data, 
+                           players=players, 
+                           past=past_events, 
+                           honors=honors, 
+                           error=error_msg,
+                           logo=logo_final)
 
 if __name__ == '__main__':
     app.run(debug=True)
