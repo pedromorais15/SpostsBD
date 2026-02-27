@@ -161,6 +161,47 @@ button { background: var(--neon-blue); border: none; padding: 0 25px; border-rad
     /* Efeito de reflexo no escudo */
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
+/* Grade de informações técnicas */
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Cria duas colunas */
+    gap: 15px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    color: var(--neon-blue); /* Ou a cor que você definiu para o neon azul */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.spec-value {
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+.cyber-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    margin: 20px 0;
+}
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
 
 /* Ajuste para dispositivos móveis */
 @media (max-width: 900px) {
