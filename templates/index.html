@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutStats | Títulos e Resultados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <header>
+            <h1 class="logo">Fut<span class="neon-text">Stats</span></h1>
+            <form method="POST" class="search-box">
+                <input type="text" name="team_name" placeholder="Ex: Palmeiras, Real Madrid, Al Nassr..." required>
+                <button type="submit">Explorar</button>
+            </form>
+        </header>
+
+        {% if club %}
+        <main class="fade-in">
+            <div class="top-section">
+                <section class="results-container neon-border-purple">
+                    <h3>Últimos Resultados</h3>
+                    <div class="results-list">
+                        {% if past %}
+                            {% for event in past[:5] %}
+                            <div class="match-card">
+                                <span class="match-date">{{ event.dateEvent }}</span>
+                                <p class="match-teams">{{ event.strEvent }}</p>
+                                <div class="match-score">{{ event.intHomeScore }} - {{ event.intAwayScore }}</div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Sem resultados recentes.</p>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <section class="club-info-container neon-border-blue">
+                    <div class="club-header">
+                        <img src="{{ logo }}" alt="Logo {{ club.strTeam }}" onerror="this.onerror=null;this.src='https://cdn-icons-png.flaticon.com/512/53/53244.png';">
+                        <div>
+                            <h2>{{ club.strTeam }}</h2>
+                            <span class="league-tag">{{ club.strLeague }}</span>
+                        </div>
+                    </div>
+                    <div class="club-details">
+                        <p><strong>Estádio:</strong> {{ club.strStadium }}</p>
+                        <p><strong>Local:</strong> {{ club.strStadiumLocation }}</p>
+                        <hr>
+                        <h4>História</h4>
+                        <p class="history-text">{{ club.strDescriptionPT or club.strDescriptionEN | truncate(400) }}</p>
+                    </div>
+                </section>
+            </div>
+
+            <section class="honors-section neon-border-blue">
+                <h3 class="section-title">🏆 Galeria de Glórias</h3>
+                <div class="honors-grid">
+                    {% if honors %}
+                        {% for title in honors %}
+                        <div class="honor-item">
+                            <div class="trophy-icon">🏆</div>
+                            <div class="honor-text">{{ title }}</div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">Títulos não cadastrados para este clube no banco local.</p>
+                    {% endif %}
+                </div>
+            </section>
+
+            <h3 class="section-title">Elenco Atual</h3>
+            <div class="players-grid">
+                {% for player in players[:12] %}
+                <div class="player-card neon-card">
+                    <div class="player-img-box">
+                        {% if player.strCutout %}
+                            <img src="{{ player.strCutout }}" alt="{{ player.strPlayer }}">
+                        {% else %}
+                            <div class="no-img">⚽</div>
+                        {% endif %}
+                    </div>
+                    <div class="p-data">
+                        <p class="p-name">{{ player.strPlayer }}</p>
+                        <span class="p-pos">{{ player.strPosition }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+        {% endif %}
+    </div>
+</body>
+</html>
