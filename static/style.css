@@ -211,3 +211,4 @@ button { background: var(--neon-blue); border: none; padding: 0 25px; border-rad
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 900px) { .top-section { grid-template-columns: 1fr; } }
+
