@@ -407,6 +407,14 @@ def index():
                            honors=honors, 
                            error=error_msg,
                            logo=logo_final)
+@app.errorhandler(404)
+def page_not_found(e):
+    # O segundo valor é o código de status do erro
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

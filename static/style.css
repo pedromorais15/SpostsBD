@@ -203,6 +203,49 @@ button { background: var(--neon-blue); border: none; padding: 0 25px; border-rad
     margin-bottom: 15px;
 }
 
+/* Estilos para Páginas de Erro */
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
+
+.error-content h1 {
+    font-size: 8rem;
+    margin: 0;
+    line-height: 1;
+}
+
+.error-icon {
+    font-size: 5rem;
+    margin: 20px 0;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: var(--neon-blue); /* Ou a cor que você usa no botão Explorar */
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: 0.3s;
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.btn-back:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--neon-blue);
+}
+
+.neon-text-purple {
+    color: #fff;
+    text-shadow: 0 0 10px #bc13fe, 0 0 20px #bc13fe, 0 0 40px #bc13fe;
+}
 /* Ajuste para dispositivos móveis */
 @media (max-width: 900px) {
     .top-section { grid-template-columns: 1fr; }
@@ -211,4 +254,3 @@ button { background: var(--neon-blue); border: none; padding: 0 25px; border-rad
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 900px) { .top-section { grid-template-columns: 1fr; } }
-
